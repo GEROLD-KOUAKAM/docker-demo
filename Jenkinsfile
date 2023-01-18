@@ -10,6 +10,8 @@ pipeline {
                   sh 'docker build -t geroldsiewe/docker-image .'
                 }
              }
+             }
         }
+     }
 
 
