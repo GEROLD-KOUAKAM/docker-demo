@@ -3,7 +3,7 @@ pipeline {
    stages {
    stage('docker build image') {
       steps{
-      sh ' docker build -t geroldsiewe/dockerv1 . '
+      sh ' docker build -t geroldsiewe/dockerv2 . '
      }
    }
    }
