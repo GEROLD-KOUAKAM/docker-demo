@@ -1,7 +1,7 @@
 pipeline {
   agent any
    stages {
-   stage('docker build image ') {
+   stage('docker build') {
       steps{
       sh ' docker build -t geroldsiewe/dockerv1 . '
      }
