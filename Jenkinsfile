@@ -1,16 +1,21 @@
-
-pipeline {
-     agent none
-     stages {
-         stage(' Build image ') {
-             agent any
-             steps {
-                script {
-                  sh 'docker build -t geroldsiewe/docker-image .'
-                }
-             }
-             }
-        }
+node {
+   def commit_id
+   stage('Preparation') {
+     checkout scm
+     sh "git rev-parse --short HEAD > .git/commit-id"                        
+     commit_id = readFile('.git/commit-id').trim()
+   }
+   stage('tests') {
+     nodejs(nodeJSInstallationName: 'nodejs') {
+       sh 'npm install --only=dev'
+       sh 'npm test'
      }
+   }
+   stage('docker build/push') {
+     docker.withRegistry('https://index.docker.io/v2/', 'dockerhub') {
+       def app = docker.build("geroldsiewe/docker-nodejs-demo:${commit_id}", '.').push()
+     }
+   }
+}
 
 
