@@ -1,5 +1,4 @@
 @Library('share-library')_
-
 pipeline {
      agent none
      stages {
