@@ -1,22 +1,15 @@
+@Library('share-library')_
+
 pipeline {
-     agent any
+     agent none
      stages {
          stage('Build image') {
+             agent any
              steps {
-                  sh ' docker build -t geroldsiewe/docker-image . '
+                script {
+                  sh 'docker build -t geroldsiewe/docker-image .'
                 }
              }
         }
-   
-    stages {
-         stage('Build image') {
-             steps {
-                  sh ' docker push geroldsiewe/docker-image . '
-                }
-             }
-        }
-   
-}
-
 
 
